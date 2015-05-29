@@ -439,11 +439,11 @@
 <devices>
 <device name="" package="TC2030-MCP-NL">
 <connects>
-<connect gate="G$1" pin="GND" pad="3"/>
-<connect gate="G$1" pin="MISO" pad="5"/>
+<connect gate="G$1" pin="GND" pad="6"/>
+<connect gate="G$1" pin="MISO" pad="1"/>
 <connect gate="G$1" pin="MOSI" pad="4"/>
-<connect gate="G$1" pin="RESET" pad="1"/>
-<connect gate="G$1" pin="SCK" pad="6"/>
+<connect gate="G$1" pin="RESET" pad="5"/>
+<connect gate="G$1" pin="SCK" pad="3"/>
 <connect gate="G$1" pin="VCC" pad="2"/>
 </connects>
 <technologies>
@@ -17156,10 +17156,10 @@ Source: http://www.osram.convergy.de/</description>
 <approved hash="113,1,256.068,-6.35,C12,,,,,"/>
 <approved hash="113,1,252.599,5.31707,5V,,,,,"/>
 <approved hash="113,1,255.401,-18.0171,GND,,,,,"/>
-<approved hash="113,1,275.59,0.321731,LED1,,,,,"/>
+<approved hash="113,1,275.59,0.321731,PWR,,,,,"/>
 <approved hash="113,1,264.16,-0.994831,R17,,,,,"/>
-<approved hash="113,1,151.13,-50.4783,LED2,,,,,"/>
-<approved hash="113,1,165.1,-51.7948,R18,,,,,"/>
+<approved hash="113,1,151.13,-50.4783,DIAG,,,,,"/>
+<approved hash="113,1,165.1,-51.7948,R11,,,,,"/>
 <approved hash="113,1,301.788,-62.23,C13,,,,,"/>
 <approved hash="113,1,313.289,-80.01,C9,,,,,"/>
 <approved hash="113,1,195.527,21.7212,SW_GND1,,,,,"/>
