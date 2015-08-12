@@ -71,10 +71,11 @@ void setup()
   Matrix.m_Switch = 1;
  
  // start the interrupt to service the UI   
-  TCCR2A = 0;
-  TCCR2B = 1<<CS21 | 1<<CS20;
-  TIMSK2 = 1<<TOIE2;
-  TCNT2 = 0;  
+  TCCR1A = 0;
+  TCCR1B = 1<<CS11;// | 1<<CS10;
+  TIMSK1 = 1<<TOIE1;
+  TCNT1H = 0;  
+  TCNT1L = 0;  
   
   strip.begin();
 

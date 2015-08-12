@@ -1,5 +1,6 @@
 #include "Arduino.h"
-#include "Defs.h"
+#include "oneDpong.h"
+#include "APA102.h"
 #include "PortIO.h"
 #include "Matrix.h"
 
@@ -43,7 +44,7 @@ bit
 */
 
 byte g_row = 0;
-ISR(TIMER2_OVF_vect) 
+ISR(TIMER1_OVF_vect) 
 {
   if(!g_row) {
     // clock in single bit
@@ -90,6 +91,9 @@ ISR(TIMER2_OVF_vect)
       Matrix.m_Switch = 0;
     }
   }  
+  
+  TCNT1H = 250;  
+  TCNT1L = 0;  
 }
 
 
