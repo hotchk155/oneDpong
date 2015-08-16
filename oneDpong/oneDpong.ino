@@ -4,6 +4,7 @@
 #include "APA102.h"
 #include "Display.h"
 #include "Game1DPong.h"
+#include "GameMenu.h"
 
 
 
@@ -11,7 +12,9 @@ const int strip_len = 239;
 APA102 strip(strip_len);
 
 
-CGame1DPong Game(strip_len);
+//CGame1DPong Game;
+CGame1DBreakout Game;
+CGameMenu Menu;
 void setup() 
 {
   pinMode(P_DS, OUTPUT);  
@@ -129,26 +132,23 @@ void refreshMatrix() {
   }    
 }
 */
-int q = 0;
-int cc = 0;
 void loop() 
 {
   unsigned long ms = millis();
-
-//if(!(ms & 0xFF)) {
-//  Display.showScores(cc%10, 9-cc%10);
-//  ++cc;
-//}
-
-//  delay(200);
-  if(++q >= strip_len) {
-    q=0;
+  if(Menu.run(strip,ms)) 
+  {
+    if(strip.is_transfer_complete()) {
+      Menu.render(strip);
+      strip.begin_transfer();
+    }
   }
-  Game.run(strip,ms);
-  if(strip.is_transfer_complete()) {
-//    strip.cls();
-    Game.render(strip);
-    strip.begin_transfer();
+  else
+  {   
+    Game.run(strip,ms);
+    if(strip.is_transfer_complete()) {
+      Game.render(strip);
+      strip.begin_transfer();
+    }
   }
 }
 

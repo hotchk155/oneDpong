@@ -13,30 +13,56 @@
 #define P_PLAYER1 0
 #define P_PLAYER2 1
 
+
+/*
+
+Initial speed: 0-9
+Acceleration: 0-9
+
+P1/P2: Speed Limit
+- None
+- F/M/S
+
+P1/P2: Bat operation 
+- Normal bat
+- Long bat
+- Extra long bat
+- Extra long bat can be extended again even if retracting
+- Extra long bat can be held extended
+- Normal bat, Auto hit
+
+P1/P2: Switch operation (NO/NC)
+ 
+
+Strip Length
+
+*/
+
+// Player simplify options
 enum {
-  EV_PRESS1 = 0,
-  EV_PRESS2,
-  EV_RELEASE1,
-  EV_RELEASE2,
-
-
-  EV_PRESSA,
-  EV_PRESSB,
-  EV_RELEASEA,
-  EV_RELEASEB,
-
-  EV_TIMER1,
-  EV_TIMER2,
-  EV_TIMER3,
-  EV_TIMER4,
-  EV_TIMER5
-
-
+  PONG_OPT_SPEEDLIM_1   = 0x0001,
+  PONG_OPT_SPEEDLIM_2   = 0x0002,
+  PONG_OPT_SPEEDLIM_3   = 0x0004,
+  PONG_OPT_BIGBAT_1    = 0x0008,
+  PONG_OPT_BIGBAT_2    = 0x0010,
+  PONG_OPT_BIGBAT_3    = 0x0020,
+  PONG_OPT_BAT_NOREST   = 0x0040,
+  PONG_OPT_BAT_HOLD     = 0x0080,
+  PONG_OPT_BAT_AUTO     = 0x0100
 };
-class CGameHandler
-{
-public:
-  virtual void init() = 0;
-  virtual void handle() = 0;
-  virtual void done() = 0;
-};
+
+typedef struct {
+  int initialSpeed;
+  int acceleration;
+  int playerOptions1; 
+  int playerOptions2; 
+} PONG_SETTINGS;
+
+typedef struct {
+  byte magicCookie;
+  int stripLen;
+  PONG_SETTINGS pong;
+} GAME_SETTINGS;
+
+
+
