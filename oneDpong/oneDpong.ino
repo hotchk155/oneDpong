@@ -1,20 +1,32 @@
+/////////////////////////////////////////////////////////////////////////
+//
+// ONE DIMENSIONAL PONG
+// 2015/hotchk155
+// Sixty Four Pixels Ltd  six4pix.com/pong1d
+//
+/////////////////////////////////////////////////////////////////////////
+
 #include "Arduino.h"
+#include "EEPROM.h"
 #include "oneDpong.h"
 #include "Matrix.h"
 #include "APA102.h"
+#include "Sounds.h"
 #include "Display.h"
-#include "Game1DPong.h"
-#include "GameMenu.h"
+#include "Settings.h"
+#include "GameCommon.h"
+#include "GamePong.h"
+#include "GameBreakout.h"
+#include "Menu.h"
 
 
 
-const int strip_len = 239;
-APA102 strip(strip_len);
+APA102 Strip;
+CSounds Sounds;
+CSettings Settings;
+IGame* Game = NULL;
+CMenu Menu;
 
-
-//CGame1DPong Game;
-CGame1DBreakout Game;
-CGameMenu Menu;
 void setup() 
 {
   pinMode(P_DS, OUTPUT);  
@@ -32,6 +44,10 @@ void setup()
   
   pinMode(P_PLAYER1, INPUT_PULLUP);  
   pinMode(P_PLAYER2, INPUT_PULLUP);  
+  
+  pinMode(P_SELECT, INPUT_PULLUP);  
+  pinMode(P_INPUT, INPUT_PULLUP);  
+  
  
   Matrix.m_DrawBuffer[0] = 224;
   Matrix.m_DrawBuffer[1] = 145;
@@ -79,9 +95,17 @@ void setup()
   TIMSK1 = 1<<TOIE1;
   TCNT1H = 0;  
   TCNT1L = 0;  
-  
-  strip.begin();
-
+  Settings.init();  
+  Strip.begin();
+  Strip.resize(Settings.get(CSettings::GEN_STRIP_LEN));
+  switch(Settings.get(CSettings::GEN_GAME)) {
+    case GAME_BREAKOUT:
+      Game = new CGameBreakout;
+      break;
+    default:
+      Game = new CGamePong;
+      break;
+  }
 }
 
 /*
@@ -135,19 +159,20 @@ void refreshMatrix() {
 void loop() 
 {
   unsigned long ms = millis();
-  if(Menu.run(strip,ms)) 
+  Sounds.run(ms);
+  if(Menu.run(Strip,ms)) 
   {
-    if(strip.is_transfer_complete()) {
-      Menu.render(strip);
-      strip.begin_transfer();
+    if(Strip.is_transfer_complete()) {
+      Menu.render(Strip);
+      Strip.begin_transfer();
     }
   }
   else
   {   
-    Game.run(strip,ms);
-    if(strip.is_transfer_complete()) {
-      Game.render(strip);
-      strip.begin_transfer();
+    Game->run(Strip,ms);
+    if(Strip.is_transfer_complete()) {
+      Game->render(Strip);
+      Strip.begin_transfer();
     }
   }
 }

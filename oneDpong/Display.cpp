@@ -1,13 +1,51 @@
+/////////////////////////////////////////////////////////////////////////
+//
+// ONE DIMENSIONAL PONG
+// 2015/hotchk155
+// Sixty Four Pixels Ltd  six4pix.com/pong1d
+//
+/////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////
+//
+// LED MATRIX DISPLAY MANAGER
+//
+/////////////////////////////////////////////////////////////////////////
+
 #include "Arduino.h"
 #include "Display.h"
 #include "Matrix.h"
 
 CDisplay Display;
 
+/////////////////////////////////////////////////////////////////////////
+//
+// LARGE SCOREBOARD DIGITS
+//
+/////////////////////////////////////////////////////////////////////////
+const byte digits[] PROGMEM = 
+{
+  0b00111100, 0b01000110, 0b01001010, 0b01010010, 0b01100010, 0b00111100, 
+  0b00001000, 0b00011000, 0b00001000, 0b00001000, 0b00001000, 0b00111110, 
+  0b00111100, 0b01000010, 0b00000010, 0b00111100, 0b01000000, 0b01111110, 
+  0b00111100, 0b01000010, 0b00011100, 0b00000010, 0b01000010, 0b00111100, 
+  0b00001100, 0b00010100, 0b00100100, 0b01000100, 0b01111110, 0b00000100, 
+  0b01111110, 0b01000000, 0b01111100, 0b00000010, 0b00000010, 0b01111100, 
+  0b00111100, 0b01000000, 0b01111100, 0b01000010, 0b01000010, 0b00111100, 
+  0b01111110, 0b00000010, 0b00000100, 0b00001000, 0b00010000, 0b00100000, 
+  0b00111100, 0b01000010, 0b00111100, 0b01000010, 0b01000010, 0b00111100, 
+  0b00111100, 0b01000010, 0b01000010, 0b00111110, 0b00000010, 0b00111100
+};
 
+/////////////////////////////////////////////////////////////////////////
+//
+// FULL CHARACTER SET ASCII 33-126
+//
+// PROPORTIONAL SPACED CHARACTERS
+//
+/////////////////////////////////////////////////////////////////////////
 const byte charSet[] PROGMEM = {
-
-  
+ 
 1,1,1,1,1,0,1,0, //!
 5,5,0,0,0,0,0,0, //"
 10,10,31,10,31,10,10,0, //#
@@ -120,28 +158,11 @@ const byte charSet[] PROGMEM = {
 
 };
 
+/////////////////////////////////////////////////////////////////////////
+// Lookup the 8 raster rows for an ASCII character. Unknown characters
+// are blanks. The function return the width of the character
 int lookupChar(char ch, byte *buf)
 {
-  
-  /*
-  int ofs = -1;
-  if(ch>='A' && ch<='Z') {
-    ofs = ch - 'A';
-  }
-  else if(ch>='a' && ch<='z') {
-    ofs = 26 + ch - 'a';
-  }
-  else if(ch>='0' && ch<='9') {
-    ofs = 52 + ch - '0';
-  }
-  else switch(ch) {
-    case '!': ofs = 62; break;
-    case '?': ofs = 63; break;
-    case '(': ofs = 64; break;
-    case ')': ofs = 65; break;
-  }
-  */
-  
   if(ch<33 || ch>126) {
     memset(buf, 0, 8);    
     return 3;
@@ -165,21 +186,23 @@ int lookupChar(char ch, byte *buf)
   }
 }
 
-const byte digits[] PROGMEM = 
-{
-  0b00111100, 0b01000110, 0b01001010, 0b01010010, 0b01100010, 0b00111100, 
-  0b00001000, 0b00011000, 0b00001000, 0b00001000, 0b00001000, 0b00111110, 
-  0b00111100, 0b01000010, 0b00000010, 0b00111100, 0b01000000, 0b01111110, 
-  0b00111100, 0b01000010, 0b00011100, 0b00000010, 0b01000010, 0b00111100, 
-  0b00001100, 0b00010100, 0b00100100, 0b01000100, 0b01111110, 0b00000100, 
-  0b01111110, 0b01000000, 0b01111100, 0b00000010, 0b00000010, 0b01111100, 
-  0b00111100, 0b01000000, 0b01111100, 0b01000010, 0b01000010, 0b00111100, 
-  0b01111110, 0b00000010, 0b00000100, 0b00001000, 0b00010000, 0b00100000, 
-  0b00111100, 0b01000010, 0b00111100, 0b01000010, 0b01000010, 0b00111100, 
-  0b00111100, 0b01000010, 0b01000010, 0b00111110, 0b00000010, 0b00111100
-};
+/////////////////////////////////////////////////////////////////////////
+// Measure a string and return the full width in pixels. A 1 pixel gap
+// is added for each character
+int  CDisplay::measureText(const char *sz) {
+  int width = 0;
+  while(*sz) {
+    byte buf[8];        
+    width += lookupChar(*sz, buf) + 1; 
+    sz++;
+  }
+  return width;
+}
 
-
+/////////////////////////////////////////////////////////////////////////
+// Display a string using the proportional spaced font. The ofs parameter
+// is the index of the pixel column which will appear in first column of
+// the display and can be used to implement scrolling
 void CDisplay::showText(const char *sz, int ofs) 
 {
   int i;
@@ -223,10 +246,11 @@ void CDisplay::showText(const char *sz, int ofs)
   Matrix.flip();  
 }
 
+/////////////////////////////////////////////////////////////////////////
+// Show a pair of large digits. The shift parameter adds a 4-pixel gap
+// between the characters 
 void CDisplay::showDigits(int a, int b, byte shift)
-{  
-  
-
+{   
   const byte *pa = (a<0)? NULL : &digits[6 * (a%10)];
   const byte *pb = (b<0)? NULL : &digits[6 * (b%10)];
   Matrix.m_DrawBuffer[0] = 0;
@@ -239,6 +263,8 @@ void CDisplay::showDigits(int a, int b, byte shift)
   }
 }
 
+/////////////////////////////////////////////////////////////////////////
+// Show a 2-digit counter 
 void CDisplay::showCount(int i)
 {
   i %= 100;
@@ -246,6 +272,8 @@ void CDisplay::showCount(int i)
   Matrix.flip();
 }
   
+/////////////////////////////////////////////////////////////////////////
+// Show two single digit scores with a "divider" line
 void CDisplay::showScores(int a, int b)
 {
   showDigits(a,b,1);

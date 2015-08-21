@@ -1,3 +1,11 @@
+/////////////////////////////////////////////////////////////////////////
+//
+// ONE DIMENSIONAL PONG
+// 2015/hotchk155
+// Sixty Four Pixels Ltd  six4pix.com/pong1d
+//
+/////////////////////////////////////////////////////////////////////////
+
 #include "Arduino.h"
 #include "pins_arduino.h"
 #include "APA102.h"
@@ -8,10 +16,9 @@ APA102 *p_instance = NULL;
 
 ///////////////////////////////////////////////////////
 // constructor
-APA102::APA102(int numLeds) 
+APA102::APA102() 
 {    
-  m_numLeds = numLeds;
-  m_data = NULL;
+  m_numLeds = 0;
   m_ledIndex = 0;
   m_sendState = -1;  
   p_instance= this;
@@ -41,7 +48,6 @@ void APA102::begin()
     (0<<SPR1) |
     (0<<SPR0);
 
- m_data = new LED[m_numLeds];
  m_sendState = -1;
  m_ledIndex = 0; 
 }    
@@ -80,6 +86,24 @@ void APA102::cls()
   for(int i=0; i<m_numLeds; ++i)    
     m_data[i] = RGB_LED(0,0,0);
 }
+
+///////////////////////////////////////////////////////
+void APA102::fill(LED colour)
+{
+  for(int i=0; i<m_numLeds; ++i)    
+    m_data[i] = colour;
+}
+
+///////////////////////////////////////////////////////
+void APA102::resize(int s) {
+  if(s<1 || s>APA102_MAX_LEDS) {
+    return;
+  }
+  m_sendState = -1;    
+  m_ledIndex = 0;
+  m_numLeds = s;
+}
+
 
 void APA102::run_spi() {
   if(m_sendState >= 0) // sending?
@@ -133,4 +157,6 @@ ISR (SPI_STC_vect)
   }
 }
   
+
+
 

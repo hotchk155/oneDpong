@@ -1,6 +1,10 @@
-///////////////////////////////////////////////////////
-// LIBRARY FOR APA102
-// hotchk155/2015
+/////////////////////////////////////////////////////////////////////////
+//
+// ONE DIMENSIONAL PONG
+// 2015/hotchk155
+// Sixty Four Pixels Ltd  six4pix.com/pong1d
+//
+/////////////////////////////////////////////////////////////////////////
 
 #ifndef _APA102_H_
 #define _APA102_H_
@@ -21,6 +25,8 @@ typedef struct  {
   byte r;  
 } LED;
 
+#define APA102_MAX_LEDS   300
+
 #define RGB_LED(r,g,b) (LED){b,g,r}
 
 class APA102
@@ -28,15 +34,16 @@ class APA102
 public:
   volatile int m_ledIndex;
   volatile int m_sendState;
-//  volatile int m_dataLen;
-  LED *m_data;
+  LED m_data[APA102_MAX_LEDS];
   int m_numLeds;
-  APA102(int numLeds);
+  APA102();
   void begin();
   void begin_transfer();
   int is_transfer_complete();
   void refresh();
   void cls();
+  void fill(LED colour);
+  void resize(int s);
   void run_spi();
 };
 
