@@ -9,6 +9,7 @@
 #include "Arduino.h"
 #include "EEPROM.h"
 #include "oneDpong.h"
+#include "PortIO.h"
 #include "Matrix.h"
 #include "APA102.h"
 #include "Sounds.h"
@@ -108,57 +109,22 @@ void setup()
   }
 }
 
-/*
-void refreshMatrix() {
-  int i;  
-
-   // clear shift reg
-  digitalWrite(P_DS, LOW);
-  for(i=0; i<16; ++i) {
-    digitalWrite(P_SHCP, LOW);
-    digitalWrite(P_SHCP, HIGH);
-  }
-    
-  // clock in single bit
-  digitalWrite(P_DS, HIGH);
-  digitalWrite(P_SHCP, LOW);
-  digitalWrite(P_SHCP, HIGH);
-  digitalWrite(P_DS, LOW);
-  
-  for(i=0; i<16; ++i) {
-    // clock to next position
-    digitalWrite(P_STCP, LOW);    
-    digitalWrite(P_STCP, HIGH);
-    
-    digitalWrite(P_D0, !!(disp[i]&0x01));
-    digitalWrite(P_D1, !!(disp[i]&0x02));
-    digitalWrite(P_D2, !!(disp[i]&0x04));
-    digitalWrite(P_D3, !!(disp[i]&0x08));
-    digitalWrite(P_D4, !!(disp[i]&0x10));
-    digitalWrite(P_D5, !!(disp[i]&0x20));
-    digitalWrite(P_D6, !!(disp[i]&0x40));
-    digitalWrite(P_D7, !!(disp[i]&0x80));
-    
-    delay(1);
-    
-    digitalWrite(P_D0,0);
-    digitalWrite(P_D1,0);
-    digitalWrite(P_D2,0);
-    digitalWrite(P_D3,0);
-    digitalWrite(P_D4,0);
-    digitalWrite(P_D5,0);
-    digitalWrite(P_D6,0);
-    digitalWrite(P_D7,0);
-    
-    digitalWrite(P_SHCP, LOW);
-    digitalWrite(P_SHCP, HIGH);
-    
-  }    
-}
-*/
+byte playerState = 0;
+byte player1debounce = 0;
+byte player2debounce = 0;
+byte lastMillis;
+#define PLAYER_SWITCH_DEBOUNCE 20
 void loop() 
 {
+  
   unsigned long ms = millis();
+  if((byte)ms != lastMillis) {
+    lastMillis = (byte)ms;
+    if(player1debounce) --player1debounce;
+    if(player2debounce) --player2debounce;
+  }
+  
+  
   Sounds.run(ms);
   if(Menu.run(Strip,ms)) 
   {
@@ -169,6 +135,40 @@ void loop()
   }
   else
   {   
+    if(!player1debounce) {
+      if(!digitalRead(P_PLAYER1)) {
+        if(!(playerState & 1)) {
+          Game->handleEvent(EVENT_P1_PRESS);
+          playerState |= 1;
+          player1debounce = PLAYER_SWITCH_DEBOUNCE;
+        }
+      }
+      else {
+        if(playerState & 1) {
+          Game->handleEvent(EVENT_P1_RELEASE);
+          playerState &= ~1;
+          player1debounce = PLAYER_SWITCH_DEBOUNCE;
+        }
+      }
+    }
+    
+    if(!player2debounce) {
+      if(!digitalRead(P_PLAYER2)) {
+        if(!(playerState & 2)) {
+          Game->handleEvent(EVENT_P2_PRESS);
+          playerState |= 2;
+          player2debounce = PLAYER_SWITCH_DEBOUNCE;
+        }
+      }
+      else {
+        if(playerState & 2) {
+          Game->handleEvent(EVENT_P2_RELEASE);
+          playerState &= ~2;
+          player2debounce = PLAYER_SWITCH_DEBOUNCE;
+        }
+      }
+    }
+        
     Game->run(Strip,ms);
     if(Strip.is_transfer_complete()) {
       Game->render(Strip);

@@ -16,6 +16,13 @@
 #define P_SELECT 18
 #define P_INPUT  19
 
+enum {
+  EVENT_NONE,
+  EVENT_P1_PRESS,
+  EVENT_P2_PRESS,
+  EVENT_P1_RELEASE,
+  EVENT_P2_RELEASE
+};
 
 // enumeration of games
 enum {

@@ -1,112 +1,92 @@
-typedef struct {
-  int pos;
-  byte brightness;
-  byte velocity;  
-} PARTICLE;
-
-#define EXPLODE_PARTICLES 5
 //////////////////////////////////////////////////////////////////
 // PLAYER BAT
-template<int MIN_SIZE, int MAX_SIZE>
 class C1DPBat
 {
   enum {
     ST_IDLE,
     ST_RISING,
-    ST_FALLING,
-    ST_EXPLODE,
-    ST_DEAD
-  } 
-  m_state;
+    ST_HOLD,
+    ST_FALLING
+  } m_state;
 
   enum {
 //    MIN_SIZE = 3,
 //    MAX_SIZE = 40,
     RISE_PERIOD = 2,
-    FALL_PERIOD = 15,
-    EXPLODE_PERIOD = 20
+    FALL_PERIOD = 15
   };
 
-  char m_dir;
-  byte m_pin;
+  
+  /*
+  - Normal bat
+- Long bat
+- Extra long bat
+- Extra long bat can be extended again even if retracting
+- Extra long bat can be held extended
+- Normal bat, Auto hit
+*/
+  byte m_minSize;
+  byte m_maxSize;
+  byte m_flags;
   byte m_size;
   unsigned long m_nextEvent;
-  LED m_colour;
-  PARTICLE explosion[EXPLODE_PARTICLES];
 
 public:  
-  C1DPBat(byte dir, LED colour, byte pin) {
-    m_colour = colour;
-    m_dir = dir;
-    m_pin = pin;
-    reset();
+  enum {
+    FLAG_REVDIR =        0x01,
+    FLAG_HIDDEN =        0x02,  
+    FLAG_ALLOW_REEXTEND =  0x04,
+    FLAG_ALLOW_HOLD = 0x08
+  };
+  C1DPBat() {
+    init(0,0,0);
   }
 
-  byte hitTest(int pos, int stripLen) {
-    if(m_dir < 0 && pos < stripLen-m_size)
-      return 0;
-    if(m_dir > 0 && pos >= m_size)
-      return 0;
-    return (m_state == ST_RISING);
-  }    
-
-  void explode() 
-  {
-    for(int i=0; i<EXPLODE_PARTICLES; ++i)
-    {
-      explosion[i].pos = i<<6;
-      explosion[i].brightness = 50+random(200);
-      explosion[i].velocity =  random(50);
-    }
-    m_size = 0;
-    m_nextEvent = 1;
-    m_state = ST_EXPLODE;
-  }
-
-  void reset() 
-  {
+  void init(byte minSize, byte maxSize, byte flags) {
+    m_minSize = minSize;
+    m_maxSize = maxSize;
+    m_flags = flags;
     m_state = ST_IDLE;
+    m_size = minSize;
     m_nextEvent = 0;
-    m_size = MIN_SIZE;
+  }
+  
+  byte hitTest(int pos, int stripLen) {
+    if((m_flags&FLAG_REVDIR) && pos < stripLen-m_size)
+      return 0;
+    if(!(m_flags&FLAG_REVDIR) && pos >= m_size)
+      return 0;
+    return (m_state == ST_RISING || m_state == ST_HOLD);
+  }    
+  
+  byte reset() {
+    m_flags&=~FLAG_HIDDEN;
+    m_state = ST_IDLE;
+    m_size = m_minSize;
+    m_nextEvent = 0;
+  }
+  
+  byte hide() {
+    m_flags|=FLAG_HIDDEN;    
   }
   
   void render(APA102& strip) 
   {
-    int i;
-    int stripLen = strip.m_numLeds;
-    switch(m_state) {
-     case ST_DEAD:
-       break;
-     case ST_EXPLODE:
-         for(int i=0; i<EXPLODE_PARTICLES; ++i)
-         {
-           int pos = explosion[i].pos >> 6;
-           if(pos < stripLen) {
-              if(m_dir < 0) {
-                strip.m_data[stripLen-pos] = RGB_LED(0,explosion[i].brightness,0);
-              }
-              else {
-                strip.m_data[pos] = RGB_LED(0,0,explosion[i].brightness);
-              }
-            }
-         }
-        break;
-    default:        
-      {
-        float q = 255;
-        if(m_dir < 0) {
-          for(i=stripLen-m_size; i<stripLen; ++i) {
-            strip.m_data[i] = RGB_LED(0,q,0);
-            q *= 0.8;
-          }
+    if(!(m_flags&FLAG_HIDDEN)) {    
+      int i;
+      int stripLen = strip.m_numLeds;
+      float q = 255;
+      if(m_flags&FLAG_REVDIR) {
+        for(i=stripLen-m_size; i<stripLen; ++i) {
+          strip.m_data[i] = RGB_LED(0,q,0);
+          q *= 0.8;
         }
-        else {
-          for(i=m_size; i>0; --i) {
-            strip.m_data[i] = RGB_LED(0,0,q);
-            q *= 0.8;
-          }
+      }
+      else {
+        for(i=m_size; i>0; --i) {
+          strip.m_data[i] = RGB_LED(0,0,q);
+          q *= 0.8;
         }
-        break;
       }
     }
   }
@@ -117,44 +97,46 @@ public:
     {
       switch(m_state) {
       case ST_RISING:
-        if(m_size < MAX_SIZE) {
+        if(m_size < m_maxSize) {
           ++m_size;
           m_nextEvent = ms + RISE_PERIOD;
-          break;
         }
-        m_state = ST_FALLING; // drop thru
-      case ST_FALLING:
-        if(m_size > MIN_SIZE) {
-          --m_size;
-          m_nextEvent = ms + FALL_PERIOD;
-          break;
-        }
-        m_state = ST_IDLE;
-        m_nextEvent = 0;
-        break;          
-      case ST_EXPLODE:
-        if(++m_size > 60) {
-          m_state = ST_DEAD;
-          m_nextEvent = 0;
+        else if(m_flags & FLAG_ALLOW_HOLD) {
+          m_state = ST_HOLD; 
         }
         else {
-         for(int i=0; i<EXPLODE_PARTICLES; ++i) {
-           if(!(m_size%8))
-           explosion[i].brightness/=2;
-           explosion[i].pos += explosion[i].velocity;          
-         }         
-         m_nextEvent = ms + EXPLODE_PERIOD;            
+          m_state = ST_FALLING; 
         }
         break;
+      case ST_FALLING:
+        if(m_size > m_minSize) {
+          --m_size;
+          m_nextEvent = ms + FALL_PERIOD;
+        }
+        else {
+          m_state = ST_IDLE;
+          m_nextEvent = 0;
+        }
+        break;          
       }
     }
-    else if(m_state == ST_IDLE)
+  }
+  
+  void onButtonDown() {
+    if(m_state == ST_IDLE || 
+      ((m_flags & FLAG_ALLOW_REEXTEND) && m_state == ST_FALLING))
     {
-      if(!digitalRead(m_pin)) {
         m_state = ST_RISING;
-        m_nextEvent = ms + RISE_PERIOD;
-      }
-    }    
+        m_nextEvent = 1;
+    }
+  }
+  
+  void onButtonUp() {
+    if(m_state == ST_HOLD)
+    {
+        m_state = ST_FALLING;
+        m_nextEvent = 1;
+    }        
   }
 };
 
@@ -165,6 +147,8 @@ class C1DPBall
 public:  
   int m_bri;
   float m_pos;
+  float m_limit;
+  float m_divider;
   float m_vel;
   unsigned long m_ms;  
   C1DPBall() {
@@ -218,14 +202,14 @@ class C1DPWall {
   LED m_colour;
 public:  
 
-  C1DPWall(LED c) {
+  C1DPWall() {
     m_minExt = 0;
     m_maxExt = 0;
-    m_colour = c;
   }
-  void init(int a, int b) {
+  void init(int a, int b, LED c) {
     m_minExt = a;
     m_maxExt = b;    
+    m_colour = c;
   }
   void render(APA102& strip) {
     for(int i=m_minExt; i<=m_maxExt; ++i) {
@@ -259,4 +243,5 @@ class IGame {
   public:
     virtual void run(APA102& strip, unsigned long ms) = 0;
     virtual void render(APA102& strip) = 0;
+    virtual void handleEvent(int event) = 0;
 };

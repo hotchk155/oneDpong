@@ -14,8 +14,8 @@ class CGameBreakout : public IGame
     ST_SHOW_SCORE,    
     ST_COUNT,    
   };
-  C1DPBat<3,25> m_Player1;  
-  C1DPBat<3,25> m_Player2;  
+  C1DPBat m_Player1;  
+  C1DPBat m_Player2;  
   C1DPBall m_Ball1;
   C1DPBall m_Ball2;
   C1DPWall m_Wall1;
@@ -30,14 +30,19 @@ class CGameBreakout : public IGame
   int m_rallyCount1;
   int m_rallyCount2;
 public:  
-  CGameBreakout() :
-  m_Player1(1, RGB_LED(0x00, 0xFF, 0x00), P_PLAYER1),
-  m_Player2(-1, RGB_LED(0x00, 0x00, 0xFF), P_PLAYER2),
-  m_Wall1(RGB_LED(0x00, 0x3f, 0x00)),
-  m_Wall2(RGB_LED(0x00, 0x00, 0x3f))
+  CGameBreakout()
   {
     m_state = ST_INIT;
   }
+  void handleEvent(int event) {
+    switch(event) {
+      case EVENT_P1_PRESS:   m_Player1.onButtonDown(); break;
+      case EVENT_P1_RELEASE: m_Player1.onButtonUp(); break;
+      case EVENT_P2_PRESS:   m_Player2.onButtonDown(); break;
+      case EVENT_P2_RELEASE: m_Player2.onButtonUp(); break;
+    }    
+  }
+  
   void state(int s, unsigned int ms) {
     m_state = s;
     m_stateChangeTime = ms;
@@ -76,10 +81,12 @@ public:
        {
          int len = strip.m_numLeds/6;       
          int mid = strip.m_numLeds/2;       
-         m_Wall1.init(mid-len, mid);
-         m_Wall2.init(mid+1, mid+len+1);
+         m_Wall1.init(mid-len, mid, RGB_LED(0x00, 0x3f, 0x00));
+         m_Wall2.init(mid+1, mid+len+1, RGB_LED(0x00, 0x00, 0x3f));
          nextBall1(strip.m_numLeds);
          nextBall2(strip.m_numLeds);
+         m_Player1.init(3, 25, 0);
+         m_Player2.init(3, 25, C1DPBat::FLAG_REVDIR);
          m_rallyCount1 = 0;
          m_rallyCount2 = 0;
          state(ST_IN_PLAY, ms);
