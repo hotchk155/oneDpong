@@ -18646,14 +18646,10 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <part name="PTC1" library="microbuilder" deviceset="PTC" device="1812"/>
 <part name="D2" library="SparkFun" deviceset="DIODE-ZENER" device="-BZT52"/>
 <part name="R19" library="rcl" deviceset="R-EU_" device="R0805"/>
-<part name="5VA" library="pinhead" deviceset="PINHD-1X1" device=""/>
-<part name="5VB" library="pinhead" deviceset="PINHD-1X1" device=""/>
-<part name="GNDA" library="pinhead" deviceset="PINHD-1X1" device=""/>
-<part name="GNDB" library="pinhead" deviceset="PINHD-1X1" device=""/>
+<part name="5V" library="pinhead" deviceset="PINHD-1X1" device=""/>
+<part name="GND_" library="pinhead" deviceset="PINHD-1X1" device=""/>
 <part name="D1" library="diode" deviceset="DIODE-" device="SMC"/>
-<part name="5VA1" library="pinhead" deviceset="PINHD-1X1" device=""/>
 <part name="5VA2" library="pinhead" deviceset="PINHD-1X1" device=""/>
-<part name="5VA3" library="pinhead" deviceset="PINHD-1X1" device=""/>
 <part name="5VA4" library="pinhead" deviceset="PINHD-1X1" device=""/>
 <part name="R20" library="rcl" deviceset="R-EU_" device="R0805"/>
 <part name="C14" library="rcl" deviceset="C-EU" device="C0805"/>
@@ -18727,14 +18723,10 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <instance part="PTC1" gate="G$1" x="271.78" y="99.06"/>
 <instance part="D2" gate="G$1" x="287.02" y="93.98" rot="R90"/>
 <instance part="R19" gate="G$1" x="287.02" y="76.2" rot="R270"/>
-<instance part="5VA" gate="G$1" x="248.92" y="99.06" rot="R180"/>
-<instance part="5VB" gate="G$1" x="248.92" y="93.98" rot="R180"/>
-<instance part="GNDA" gate="G$1" x="248.92" y="73.66" rot="R180"/>
-<instance part="GNDB" gate="G$1" x="248.92" y="68.58" rot="R180"/>
+<instance part="5V" gate="G$1" x="248.92" y="99.06" rot="R180"/>
+<instance part="GND_" gate="G$1" x="248.92" y="68.58" rot="R180"/>
 <instance part="D1" gate="G$1" x="279.4" y="81.28" rot="R90"/>
-<instance part="5VA1" gate="G$1" x="345.44" y="114.3"/>
 <instance part="5VA2" gate="G$1" x="345.44" y="109.22"/>
-<instance part="5VA3" gate="G$1" x="355.6" y="86.36"/>
 <instance part="5VA4" gate="G$1" x="355.6" y="81.28"/>
 <instance part="R20" gate="G$1" x="320.04" y="76.2" rot="R180"/>
 <instance part="C14" gate="G$1" x="297.18" y="78.74"/>
@@ -18898,19 +18890,14 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <wire x1="254" y1="-25.4" x2="254" y2="-12.7" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="GNDB" gate="G$1" pin="1"/>
+<pinref part="GND_" gate="G$1" pin="1"/>
 <pinref part="Q3" gate="G$1" pin="K"/>
-<wire x1="251.46" y1="68.58" x2="264.16" y2="68.58" width="0.1524" layer="91"/>
-<wire x1="264.16" y1="68.58" x2="279.4" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="251.46" y1="68.58" x2="279.4" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="279.4" y1="68.58" x2="287.02" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="287.02" y1="68.58" x2="297.18" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="297.18" y1="68.58" x2="309.88" y2="68.58" width="0.1524" layer="91"/>
-<pinref part="GNDA" gate="G$1" pin="1"/>
 <wire x1="309.88" y1="68.58" x2="309.88" y2="76.2" width="0.1524" layer="91"/>
 <wire x1="309.88" y1="76.2" x2="309.88" y2="83.82" width="0.1524" layer="91"/>
-<wire x1="251.46" y1="73.66" x2="264.16" y2="73.66" width="0.1524" layer="91"/>
-<wire x1="264.16" y1="73.66" x2="264.16" y2="68.58" width="0.1524" layer="91"/>
-<junction x="264.16" y="68.58"/>
 <pinref part="R19" gate="G$1" pin="2"/>
 <wire x1="287.02" y1="71.12" x2="287.02" y2="68.58" width="0.1524" layer="91"/>
 <junction x="287.02" y="68.58"/>
@@ -19373,14 +19360,10 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <pinref part="D1" gate="G$1" pin="C"/>
 <wire x1="279.4" y1="83.82" x2="279.4" y2="99.06" width="0.1524" layer="91"/>
 <junction x="279.4" y="99.06"/>
-<pinref part="5VA1" gate="G$1" pin="1"/>
-<wire x1="342.9" y1="114.3" x2="309.88" y2="114.3" width="0.1524" layer="91"/>
-<wire x1="309.88" y1="114.3" x2="309.88" y2="109.22" width="0.1524" layer="91"/>
 <junction x="309.88" y="99.06"/>
 <pinref part="5VA2" gate="G$1" pin="1"/>
 <wire x1="309.88" y1="109.22" x2="309.88" y2="99.06" width="0.1524" layer="91"/>
 <wire x1="342.9" y1="109.22" x2="309.88" y2="109.22" width="0.1524" layer="91"/>
-<junction x="309.88" y="109.22"/>
 <wire x1="309.88" y1="99.06" x2="370.84" y2="99.06" width="0.1524" layer="91"/>
 <label x="370.84" y="99.06" size="1.778" layer="95"/>
 </segment>
@@ -19778,14 +19761,9 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 </net>
 <net name="N$28" class="0">
 <segment>
-<pinref part="5VA" gate="G$1" pin="1"/>
+<pinref part="5V" gate="G$1" pin="1"/>
 <pinref part="PTC1" gate="G$1" pin="2"/>
-<wire x1="251.46" y1="99.06" x2="264.16" y2="99.06" width="0.1524" layer="91"/>
-<pinref part="5VB" gate="G$1" pin="1"/>
-<wire x1="264.16" y1="99.06" x2="266.7" y2="99.06" width="0.1524" layer="91"/>
-<wire x1="251.46" y1="93.98" x2="264.16" y2="93.98" width="0.1524" layer="91"/>
-<wire x1="264.16" y1="93.98" x2="264.16" y2="99.06" width="0.1524" layer="91"/>
-<junction x="264.16" y="99.06"/>
+<wire x1="251.46" y1="99.06" x2="266.7" y2="99.06" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$31" class="0">
@@ -19805,14 +19783,9 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 </net>
 <net name="N$32" class="0">
 <segment>
-<pinref part="5VA3" gate="G$1" pin="1"/>
-<wire x1="345.44" y1="81.28" x2="345.44" y2="86.36" width="0.1524" layer="91"/>
-<wire x1="345.44" y1="86.36" x2="353.06" y2="86.36" width="0.1524" layer="91"/>
 <pinref part="5VA4" gate="G$1" pin="1"/>
-<wire x1="353.06" y1="81.28" x2="345.44" y2="81.28" width="0.1524" layer="91"/>
+<wire x1="353.06" y1="81.28" x2="340.36" y2="81.28" width="0.1524" layer="91"/>
 <pinref part="Q2" gate="G$1" pin="D"/>
-<wire x1="340.36" y1="81.28" x2="345.44" y2="81.28" width="0.1524" layer="91"/>
-<junction x="345.44" y="81.28"/>
 </segment>
 </net>
 <net name="Z" class="0">
@@ -19877,12 +19850,12 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <approved hash="113,1,166.501,-11.9867,PLAYER2,,,,,"/>
 <approved hash="113,1,167.877,21.7212,SW1,,,,,"/>
 <approved hash="113,1,167.877,14.1012,SW2,,,,,"/>
-<approved hash="113,1,345.677,-97.6588,SPK-,,,,,"/>
 <approved hash="113,1,345.677,-69.7188,SPK+,,,,,"/>
 <approved hash="113,1,325.989,-77.47,C7,,,,,"/>
 <approved hash="113,1,334.01,-69.762,C8,,,,,"/>
 <approved hash="113,1,317.659,-54.61,C10,,,,,"/>
 <approved hash="113,1,315.955,-55.88,R16,,,,,"/>
+<approved hash="113,1,284.227,-36.83,C11,,,,,"/>
 <approved hash="113,1,256.068,-6.35,C12,,,,,"/>
 <approved hash="113,1,275.59,0.321731,PWR,,,,,"/>
 <approved hash="113,1,264.16,-0.994831,R17,,,,,"/>
@@ -19890,13 +19863,22 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <approved hash="113,1,165.1,-51.7948,R11,,,,,"/>
 <approved hash="113,1,301.788,-62.23,C13,,,,,"/>
 <approved hash="113,1,313.289,-80.01,C9,,,,,"/>
-<approved hash="113,1,195.527,21.7212,SW_GND1,,,,,"/>
-<approved hash="113,1,195.527,14.1012,SW_GND2,,,,,"/>
 <approved hash="113,1,72.2588,48.4971,RST,,,,,"/>
-<approved hash="113,1,49.3988,50.533,RST_GND,,,,,"/>
-<approved hash="113,1,163.699,-19.7429,P2GND,,,,,"/>
-<approved hash="113,1,171.319,-19.7429,P1GND,,,,,"/>
 <approved hash="113,1,328.655,-88.9,R10,,,,,"/>
+<approved hash="113,1,204.47,5.23909,C15,,,,,"/>
+<approved hash="113,1,282.935,-50.8,R18,,,,,"/>
+<approved hash="113,1,271.78,100.872,PTC1,,,,,"/>
+<approved hash="113,1,288.015,76.2,R19,,,,,"/>
+<approved hash="113,1,251.223,97.6588,5V,,,,,"/>
+<approved hash="113,1,251.223,67.1788,GND_,,,,,"/>
+<approved hash="113,1,278.913,81.28,D1,,,,,"/>
+<approved hash="113,1,343.137,110.621,5VA2,,,,,"/>
+<approved hash="113,1,353.297,82.6812,5VA4,,,,,"/>
+<approved hash="113,1,320.04,75.2052,R20,,,,,"/>
+<approved hash="113,1,299.561,77.47,C14,,,,,"/>
+<approved hash="113,1,326.665,58.42,R21,,,,,"/>
+<approved hash="113,1,250.321,-25.6371,GND,,,,,"/>
+<approved hash="113,1,255.401,-25.6371,GND1,,,,,"/>
 </errors>
 </schematic>
 </drawing>
