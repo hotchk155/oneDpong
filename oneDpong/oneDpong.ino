@@ -30,6 +30,8 @@ CMenu Menu;
 
 void setup() 
 {
+  randomSeed(analogRead(A6));
+  
   pinMode(P_DS, OUTPUT);  
   pinMode(P_SHCP, OUTPUT);  
   pinMode(P_STCP, OUTPUT);  
@@ -50,45 +52,6 @@ void setup()
   pinMode(P_INPUT, INPUT_PULLUP);  
   
  
-  Matrix.m_DrawBuffer[0] = 224;
-  Matrix.m_DrawBuffer[1] = 145;
-  Matrix.m_DrawBuffer[2] = 145;
-  Matrix.m_DrawBuffer[3] = 237;
-  Matrix.m_DrawBuffer[4] = 146;
-  Matrix.m_DrawBuffer[5] = 146;
-  Matrix.m_DrawBuffer[6] = 146;
-  Matrix.m_DrawBuffer[7] = 12;
-
-  Matrix.m_DrawBuffer[8] = 224;
-  Matrix.m_DrawBuffer[9] = 39;
-  Matrix.m_DrawBuffer[10] = 41;
-  Matrix.m_DrawBuffer[11] = 41;
-  Matrix.m_DrawBuffer[12] = 9;
-  Matrix.m_DrawBuffer[13] = 7;
-  Matrix.m_DrawBuffer[14] = 1;
-  Matrix.m_DrawBuffer[15] = 14;
-
-  Matrix.m_DispBuffer[0] = 0;
-  Matrix.m_DispBuffer[1] = 236;
-  Matrix.m_DispBuffer[2] = 146;
-  Matrix.m_DispBuffer[3] = 146;
-  Matrix.m_DispBuffer[4] = 243;
-  Matrix.m_DispBuffer[5] = 141;
-  Matrix.m_DispBuffer[6] = 129;
-  Matrix.m_DispBuffer[7] = 128;
-
-  Matrix.m_DispBuffer[8] = 7;
-  Matrix.m_DispBuffer[9] = 9;
-  Matrix.m_DispBuffer[10] = 9;
-  Matrix.m_DispBuffer[11] = 233;
-  Matrix.m_DispBuffer[12] = 39;
-  Matrix.m_DispBuffer[13] = 33;
-  Matrix.m_DispBuffer[14] = 46;
-  Matrix.m_DispBuffer[15] = 0;
-
-//  memcpy(Matrix.m_DispBuffer, Matrix.m_DrawBuffer, 16);
-  //Matrix.m_DrawBuffer[8] = 0b10000000;
-  Matrix.m_Switch = 1;
  
  // start the interrupt to service the UI   
   TCCR1A = 0;

@@ -8,11 +8,13 @@ class CSounds {
 public:
   enum {
     S_NONE,
+    S_BEEP,
     S_COUNT,
     S_HIT,
     S_SERVE,
     S_GOAL,
-    S_TICK
+    S_TICK,
+    S_WIN
   };
 
   CSounds() {
@@ -33,6 +35,15 @@ public:
       case S_NONE:
         noTone(P_SOUND);
         m_nextEvent = 0;         
+        break;
+      case S_BEEP:
+        if(m_count++ == 0) {        
+          tone(P_SOUND, m_param);
+          m_nextEvent = ms + 100;
+        }
+        else {
+          m_sound = S_NONE;
+        }
         break;
       case S_COUNT:
         if(m_count == 0) {
@@ -77,6 +88,21 @@ public:
         m_nextEvent = ms + 10;
         m_sound = S_NONE;
         break;
+      case S_WIN:
+        if(++m_count < 30) {
+          switch(m_count & 3) {
+            case 0: tone(P_SOUND, 400+25*(m_count-1)); break;
+            case 1: tone(P_SOUND, 400+25*(m_count)); break;
+            case 2: tone(P_SOUND, 400+25*(m_count+1)); break;
+            case 3: noTone(P_SOUND); break;
+          }
+          m_nextEvent = ms + 25;        
+        }
+        else 
+        {
+          m_sound = S_NONE;
+        }
+        break;        
       } 
     }
   }
