@@ -18589,14 +18589,14 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <parts>
 <part name="U$1" library="jasons_stuff" deviceset="LARGE8X8" device=""/>
 <part name="IC5" library="jasons_stuff" deviceset="NPIC6C596" device=""/>
-<part name="R1" library="rcl" deviceset="R-EU_" device="R0805"/>
-<part name="R2" library="rcl" deviceset="R-EU_" device="R0805"/>
-<part name="R3" library="rcl" deviceset="R-EU_" device="R0805"/>
-<part name="R4" library="rcl" deviceset="R-EU_" device="R0805"/>
-<part name="R5" library="rcl" deviceset="R-EU_" device="R0805"/>
-<part name="R6" library="rcl" deviceset="R-EU_" device="R0805"/>
-<part name="R7" library="rcl" deviceset="R-EU_" device="R0805"/>
-<part name="R8" library="rcl" deviceset="R-EU_" device="R0805"/>
+<part name="R1" library="rcl" deviceset="R-EU_" device="R0805" value="100r"/>
+<part name="R2" library="rcl" deviceset="R-EU_" device="R0805" value="100r"/>
+<part name="R3" library="rcl" deviceset="R-EU_" device="R0805" value="100r"/>
+<part name="R4" library="rcl" deviceset="R-EU_" device="R0805" value="100r"/>
+<part name="R5" library="rcl" deviceset="R-EU_" device="R0805" value="100r"/>
+<part name="R6" library="rcl" deviceset="R-EU_" device="R0805" value="100r"/>
+<part name="R7" library="rcl" deviceset="R-EU_" device="R0805" value="100r"/>
+<part name="R8" library="rcl" deviceset="R-EU_" device="R0805" value="100r"/>
 <part name="U$2" library="jasons_stuff" deviceset="LARGE8X8" device=""/>
 <part name="IC4" library="jasons_stuff" deviceset="NPIC6C596" device=""/>
 <part name="C1" library="rcl" deviceset="C-EU" device="C0805"/>
@@ -18609,10 +18609,10 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <part name="R9" library="rcl" deviceset="R-EU_" device="R0805"/>
 <part name="JP1" library="pinhead" deviceset="PINHD-1X6" device=""/>
 <part name="IC2" library="74xx-eu" deviceset="74*257" device="D" technology="HC"/>
-<part name="R12" library="rcl" deviceset="R-EU_" device="R0805"/>
-<part name="R13" library="rcl" deviceset="R-EU_" device="R0805"/>
-<part name="R14" library="rcl" deviceset="R-EU_" device="R0805"/>
-<part name="R15" library="rcl" deviceset="R-EU_" device="R0805"/>
+<part name="R12" library="rcl" deviceset="R-EU_" device="R0805" value="100r"/>
+<part name="R13" library="rcl" deviceset="R-EU_" device="R0805" value="100r"/>
+<part name="R14" library="rcl" deviceset="R-EU_" device="R0805" value="100r"/>
+<part name="R15" library="rcl" deviceset="R-EU_" device="R0805" value="100r"/>
 <part name="MOSI1" library="pinhead" deviceset="PINHD-1X1" device=""/>
 <part name="MOSI2" library="pinhead" deviceset="PINHD-1X1" device=""/>
 <part name="SCK1" library="pinhead" deviceset="PINHD-1X1" device=""/>
@@ -18624,37 +18624,37 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <part name="SW2" library="pinhead" deviceset="PINHD-1X1" device=""/>
 <part name="IC3" library="linear" deviceset="LM386?-*" device="M" technology="1"/>
 <part name="SPK+" library="pinhead" deviceset="PINHD-1X1" device=""/>
-<part name="C7" library="rcl" deviceset="C-EU" device="C0805"/>
+<part name="C7" library="rcl" deviceset="C-EU" device="C0805" value="47n"/>
 <part name="C8" library="rcl" deviceset="CPOL-EU" device="E2.5-6"/>
 <part name="C10" library="rcl" deviceset="C-EU" device="C0805"/>
 <part name="R16" library="rcl" deviceset="R-EU_" device="R0805"/>
-<part name="C11" library="rcl" deviceset="C-EU" device="C0805"/>
+<part name="C11" library="rcl" deviceset="C-EU" device="C0805" value="100n"/>
 <part name="C12" library="rcl" deviceset="CPOL-EU" device="E2.5-6"/>
 <part name="PWR" library="adafruit" deviceset="LED" device="3MM"/>
 <part name="R17" library="rcl" deviceset="R-EU_" device="R0805"/>
 <part name="DIAG" library="adafruit" deviceset="LED" device="3MM"/>
-<part name="R11" library="rcl" deviceset="R-EU_" device="R0805"/>
+<part name="R11" library="rcl" deviceset="R-EU_" device="R0805" value="1k"/>
 <part name="VOLUME" library="jasons_stuff" deviceset="ALPS_POT_SMALL" device=""/>
 <part name="C13" library="rcl" deviceset="CPOL-EU" device="E2.5-6"/>
-<part name="C9" library="rcl" deviceset="C-EU" device="C0805"/>
+<part name="C9" library="rcl" deviceset="C-EU" device="C0805" value="100n"/>
 <part name="ICSP" library="jasons_stuff" deviceset="TAG_CONN_AVR" device=""/>
 <part name="RST" library="pinhead" deviceset="PINHD-1X1" device=""/>
-<part name="R10" library="rcl" deviceset="R-EU_" device="R0805"/>
+<part name="R10" library="rcl" deviceset="R-EU_" device="R0805" value="10r"/>
 <part name="C15" library="rcl" deviceset="C-EU" device="C0805"/>
-<part name="R18" library="rcl" deviceset="R-EU_" device="R0805"/>
+<part name="100K" library="rcl" deviceset="R-EU_" device="R0805"/>
 <part name="Q3" library="jason_eagle6" deviceset="SCR_BT300S" device=""/>
 <part name="PTC1" library="microbuilder" deviceset="PTC" device="1812"/>
 <part name="D2" library="SparkFun" deviceset="DIODE-ZENER" device="-BZT52"/>
-<part name="R19" library="rcl" deviceset="R-EU_" device="R0805"/>
+<part name="R19" library="rcl" deviceset="R-EU_" device="R0805" value="100r"/>
 <part name="5V" library="pinhead" deviceset="PINHD-1X1" device=""/>
 <part name="GND_" library="pinhead" deviceset="PINHD-1X1" device=""/>
 <part name="D1" library="diode" deviceset="DIODE-" device="SMC"/>
 <part name="5VA2" library="pinhead" deviceset="PINHD-1X1" device=""/>
 <part name="5VA4" library="pinhead" deviceset="PINHD-1X1" device=""/>
-<part name="R20" library="rcl" deviceset="R-EU_" device="R0805"/>
-<part name="C14" library="rcl" deviceset="C-EU" device="C0805"/>
+<part name="R20" library="rcl" deviceset="R-EU_" device="R0805" value="10k"/>
+<part name="C14" library="rcl" deviceset="C-EU" device="C0805" value="100n"/>
 <part name="Q2" library="jason_eagle6" deviceset="NTD5867NL_NMOSFET" device=""/>
-<part name="R21" library="rcl" deviceset="R-EU_" device="R0805"/>
+<part name="R21" library="rcl" deviceset="R-EU_" device="R0805" value="1k"/>
 <part name="GND" library="pinhead" deviceset="PINHD-1X1" device=""/>
 <part name="GND1" library="pinhead" deviceset="PINHD-1X1" device=""/>
 </parts>
@@ -18718,7 +18718,7 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <instance part="RST" gate="G$1" x="73.66" y="50.8" rot="R90"/>
 <instance part="R10" gate="G$1" x="327.66" y="-88.9" rot="R270"/>
 <instance part="C15" gate="G$1" x="205.74" y="7.62" rot="R270"/>
-<instance part="R18" gate="G$1" x="281.94" y="-50.8" rot="R270"/>
+<instance part="100K" gate="G$1" x="281.94" y="-50.8" rot="R270"/>
 <instance part="Q3" gate="G$1" x="309.88" y="91.44" rot="R270"/>
 <instance part="PTC1" gate="G$1" x="271.78" y="99.06"/>
 <instance part="D2" gate="G$1" x="287.02" y="93.98" rot="R90"/>
@@ -19748,13 +19748,13 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <net name="N$16" class="0">
 <segment>
 <pinref part="VOLUME" gate="G$1" pin="B"/>
-<pinref part="R18" gate="G$1" pin="2"/>
+<pinref part="100K" gate="G$1" pin="2"/>
 <wire x1="281.94" y1="-58.42" x2="281.94" y2="-55.88" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$25" class="0">
 <segment>
-<pinref part="R18" gate="G$1" pin="1"/>
+<pinref part="100K" gate="G$1" pin="1"/>
 <pinref part="C11" gate="G$1" pin="2"/>
 <wire x1="281.94" y1="-45.72" x2="281.94" y2="-40.64" width="0.1524" layer="91"/>
 </segment>
