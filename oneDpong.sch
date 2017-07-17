@@ -18641,7 +18641,7 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <part name="RST" library="pinhead" deviceset="PINHD-1X1" device=""/>
 <part name="R10" library="rcl" deviceset="R-EU_" device="R0805" value="10r"/>
 <part name="C15" library="rcl" deviceset="C-EU" device="C0805"/>
-<part name="100K" library="rcl" deviceset="R-EU_" device="R0805"/>
+<part name="R18" library="rcl" deviceset="R-EU_" device="R0805"/>
 <part name="Q3" library="jason_eagle6" deviceset="SCR_BT300S" device=""/>
 <part name="PTC1" library="microbuilder" deviceset="PTC" device="1812"/>
 <part name="D2" library="SparkFun" deviceset="DIODE-ZENER" device="-BZT52"/>
@@ -18718,7 +18718,7 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <instance part="RST" gate="G$1" x="73.66" y="50.8" rot="R90"/>
 <instance part="R10" gate="G$1" x="327.66" y="-88.9" rot="R270"/>
 <instance part="C15" gate="G$1" x="205.74" y="7.62" rot="R270"/>
-<instance part="100K" gate="G$1" x="281.94" y="-50.8" rot="R270"/>
+<instance part="R18" gate="G$1" x="281.94" y="-50.8" rot="R270"/>
 <instance part="Q3" gate="G$1" x="309.88" y="91.44" rot="R270"/>
 <instance part="PTC1" gate="G$1" x="271.78" y="99.06"/>
 <instance part="D2" gate="G$1" x="287.02" y="93.98" rot="R90"/>
@@ -19748,13 +19748,13 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <net name="N$16" class="0">
 <segment>
 <pinref part="VOLUME" gate="G$1" pin="B"/>
-<pinref part="100K" gate="G$1" pin="2"/>
+<pinref part="R18" gate="G$1" pin="2"/>
 <wire x1="281.94" y1="-58.42" x2="281.94" y2="-55.88" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$25" class="0">
 <segment>
-<pinref part="100K" gate="G$1" pin="1"/>
+<pinref part="R18" gate="G$1" pin="1"/>
 <pinref part="C11" gate="G$1" pin="2"/>
 <wire x1="281.94" y1="-45.72" x2="281.94" y2="-40.64" width="0.1524" layer="91"/>
 </segment>
