@@ -51,7 +51,11 @@ void setup()
   pinMode(P_SELECT, INPUT_PULLUP);  
   pinMode(P_INPUT, INPUT_PULLUP);  
   
- 
+
+  delay(200);
+  pinMode(P_ENABLE_STRIP, OUTPUT);  
+  digitalWrite(P_ENABLE_STRIP, HIGH);  
+
  
  // start the interrupt to service the UI   
   TCCR1A = 0;
@@ -139,4 +143,3 @@ void loop()
     }
   }
 }
-

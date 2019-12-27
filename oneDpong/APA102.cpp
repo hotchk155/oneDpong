@@ -30,11 +30,11 @@ void APA102::begin()
   // set pin modes
   pinMode(SCK, OUTPUT);
   pinMode(MOSI, OUTPUT);
-  pinMode(10, OUTPUT); // must be output for SPI master mode
+  //pinMode(10, OUTPUT); // must be output for SPI master mode
 
   digitalWrite(SCK, LOW);
   digitalWrite(MOSI, LOW);
-  digitalWrite(10, LOW);
+  //digitalWrite(10, LOW);
 
   // set SPI control register
   SPCR = 
@@ -157,6 +157,3 @@ ISR (SPI_STC_vect)
   }
 }
   
-
-
-

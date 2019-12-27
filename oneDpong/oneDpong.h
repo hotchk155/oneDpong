@@ -15,6 +15,7 @@
 
 #define P_SELECT 18
 #define P_INPUT  19
+#define P_ENABLE_STRIP 10
 
 enum {
   EVENT_NONE,
@@ -31,7 +32,3 @@ enum {
   GAME_BREAKOUT,
   GAME_MAX
 };
-
-
-
-
