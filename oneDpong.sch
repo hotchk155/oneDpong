@@ -20814,8 +20814,8 @@ BF959 corrected 2008.03.06&lt;br&gt;</description>
 <part name="SPK+" library="pinhead" deviceset="PINHD-1X1" device=""/>
 <part name="C10" library="rcl" deviceset="C-EU" device="C0805" value="47n"/>
 <part name="C8" library="rcl" deviceset="CPOL-EU" device="E2.5-6"/>
-<part name="C11" library="rcl" deviceset="C-EU" device="C0805"/>
-<part name="R15" library="rcl" deviceset="R-EU_" device="R0805"/>
+<part name="C11" library="rcl" deviceset="C-EU" device="C0805" value="DNF"/>
+<part name="R15" library="rcl" deviceset="R-EU_" device="R0805" value="DNF"/>
 <part name="C13" library="rcl" deviceset="C-EU" device="C0805" value="100n"/>
 <part name="C9" library="rcl" deviceset="CPOL-EU" device="E2.5-6"/>
 <part name="PWR" library="adafruit" deviceset="LED" device="3MM"/>
@@ -20829,7 +20829,7 @@ BF959 corrected 2008.03.06&lt;br&gt;</description>
 <part name="RST" library="pinhead" deviceset="PINHD-1X1" device=""/>
 <part name="R13" library="rcl" deviceset="R-EU_" device="R0805" value="10r"/>
 <part name="C1" library="rcl" deviceset="C-EU" device="C0805"/>
-<part name="R14" library="rcl" deviceset="R-EU_" device="R0805"/>
+<part name="R14" library="rcl" deviceset="R-EU_" device="R0805" value="4k7"/>
 <part name="PTC1" library="microbuilder" deviceset="PTC" device="1812"/>
 <part name="5V" library="pinhead" deviceset="PINHD-1X1" device=""/>
 <part name="GND_" library="pinhead" deviceset="PINHD-1X1" device=""/>
@@ -20851,6 +20851,7 @@ BF959 corrected 2008.03.06&lt;br&gt;</description>
 <sheets>
 <sheet>
 <plain>
+<text x="284.48" y="-76.2" size="1.778" layer="91">10KA</text>
 </plain>
 <instances>
 <instance part="U$1" gate="G$1" x="22.86" y="101.6" rot="MR0"/>

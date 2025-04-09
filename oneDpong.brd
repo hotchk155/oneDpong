@@ -4269,11 +4269,11 @@ design rules under a new name.</description>
 <attribute name="NAME" x="65.786" y="76.962" size="1.27" layer="26" font="vector" ratio="20" rot="MR0"/>
 <attribute name="VALUE" x="62.23" y="71.755" size="1.016" layer="28" rot="MR90"/>
 </element>
-<element name="C11" library="rcl" package="C0805" value="" x="53.086" y="62.23" smashed="yes" rot="MR270">
+<element name="C11" library="rcl" package="C0805" value="DNF" x="53.086" y="62.23" smashed="yes" rot="MR270">
 <attribute name="NAME" x="51.435" y="60.198" size="1.27" layer="26" font="vector" ratio="20" rot="MR180"/>
 <attribute name="VALUE" x="55.626" y="63.5" size="1.27" layer="28" rot="MR270"/>
 </element>
-<element name="R15" library="rcl" package="R0805" value="" x="45.72" y="62.23" smashed="yes" rot="MR90">
+<element name="R15" library="rcl" package="R0805" value="DNF" x="45.72" y="62.23" smashed="yes" rot="MR90">
 <attribute name="NAME" x="47.244" y="59.055" size="1.27" layer="26" font="vector" ratio="20" rot="MR0"/>
 <attribute name="VALUE" x="43.18" y="61.595" size="1.27" layer="28" rot="MR90"/>
 </element>
@@ -4322,7 +4322,7 @@ design rules under a new name.</description>
 <attribute name="NAME" x="141.097" y="78.359" size="1.27" layer="26" font="vector" ratio="20" rot="MR0"/>
 <attribute name="VALUE" x="144.78" y="76.2" size="1.27" layer="28" rot="MR0"/>
 </element>
-<element name="R14" library="rcl" package="R0805" value="" x="39.37" y="74.93" smashed="yes" rot="MR0">
+<element name="R14" library="rcl" package="R0805" value="4k7" x="39.37" y="74.93" smashed="yes" rot="MR0">
 <attribute name="NAME" x="41.021" y="76.327" size="1.27" layer="26" font="vector" ratio="20" rot="MR0"/>
 <attribute name="VALUE" x="40.005" y="72.39" size="1.27" layer="28" rot="MR0"/>
 </element>
